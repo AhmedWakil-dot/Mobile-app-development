@@ -1,10 +1,9 @@
-/* Custom Fonts - Ensure you have these hosted or linked via Adobe/Google */
 :root {
     --primary: #241f47;
     --secondary: #ededed;
     --accent: #c6ff00;
-    --font-main: 'Satoshi', sans-serif;
-    --font-alt: 'Helvetica Neue', Arial, sans-serif;
+    --font-header: 'Satoshi', 'Helvetica Neue', Arial, sans-serif;
+    --font-body: 'Helvetica Neue', Helvetica, sans-serif;
 }
 
 * {
@@ -16,33 +15,27 @@
 body {
     background-color: var(--primary);
     color: var(--secondary);
-    font-family: var(--font-main);
-    line-height: 1.6;
-    overflow-x: hidden;
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
 }
 
-/* Typography */
-h1, h2 {
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: -2px;
-}
-
-/* Navigation */
+/* Nav - Minimalist & Fixed */
 nav {
-    padding: 2rem;
+    position: fixed;
+    top: 0;
+    width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    position: fixed;
-    width: 100%;
-    z-index: 100;
-    background: linear-gradient(to bottom, var(--primary) 20%, transparent);
+    padding: 30px 50px;
+    z-index: 1000;
+    background: linear-gradient(to bottom, var(--primary) 40%, transparent);
 }
 
 .logo {
-    font-size: 2rem;
+    font-family: var(--font-header);
+    font-size: 1.8rem;
     font-weight: 900;
+    letter-spacing: -1px;
 }
 
 .logo span { color: var(--accent); }
@@ -50,108 +43,136 @@ nav {
 .nav-links a {
     color: var(--secondary);
     text-decoration: none;
-    margin-left: 2rem;
-    font-family: var(--font-alt);
+    margin-left: 30px;
     font-weight: 500;
-    transition: color 0.3s ease;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    transition: color 0.2s;
 }
 
-.nav-links a:hover {
-    color: var(--accent);
-}
+.nav-links a:hover { color: var(--accent); }
 
-/* Sections */
-section, header {
-    padding: 10vh 2rem;
-}
-
-/* Hero */
+/* Hero - Massive Type */
 .hero {
-    height: 100vh;
+    height: 80vh;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
+    align-items: center;
+    padding: 0 50px;
 }
 
 .hero h1 {
-    font-size: clamp(3rem, 10vw, 8rem);
-    line-height: 0.9;
+    font-family: var(--font-header);
+    font-size: clamp(4rem, 12vw, 10rem);
+    line-height: 0.85;
+    letter-spacing: -0.05em;
+    font-weight: 900;
 }
 
 .hero h1 span { color: var(--accent); }
 
-/* Catalog Grid */
-.catalog .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 1rem;
+/* Brand Statement */
+.brand-statement {
+    padding: 100px 50px;
+    border-top: 1px solid rgba(237, 237, 237, 0.1);
 }
 
-.item {
-    background: #2a2552; /* Slightly lighter navy for empty state */
-    aspect-ratio: 4/5;
-    display: flex;
-    align-items: flex-end;
-    padding: 1rem;
-    border: 1px solid rgba(237, 237, 237, 0.1);
-    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    cursor: pointer;
-}
-
-.item:hover {
-    border-color: var(--accent);
-    transform: scale(0.98);
-    box-shadow: 0 0 30px rgba(198, 255, 0, 0.1);
-}
-
-.item span {
-    font-weight: 900;
-    opacity: 0.3;
-}
-
-.item:hover span {
+.label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
     color: var(--accent);
-    opacity: 1;
+    margin-bottom: 20px;
 }
 
-/* Contact Form */
-.contact {
-    max-width: 800px;
+.brand-statement p {
+    font-size: clamp(1.5rem, 4vw, 3rem);
+    line-height: 1.1;
+    max-width: 1200px;
+    font-weight: 500;
 }
 
-form {
+/* The Grid - Pentagram Style */
+.work-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px; /* Thin lines between items */
+    background-color: rgba(237, 237, 237, 0.1); /* Divider color */
+    border-top: 1px solid rgba(237, 237, 237, 0.1);
+}
+
+.grid-item {
+    background-color: var(--primary);
+    padding: 50px;
+    transition: background-color 0.3s ease;
+}
+
+.grid-item.large {
+    grid-column: span 2;
+}
+
+.image-placeholder {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background-color: #2a2552;
     display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    margin-top: 2rem;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.item-meta {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Hover Accent */
+.grid-item:hover .image-placeholder {
+    background-color: var(--accent);
+    color: var(--primary);
+}
+
+.grid-item:hover h3 { color: var(--accent); }
+
+/* Contact Section */
+.contact-section {
+    padding: 100px 50px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
 }
 
 input, textarea {
+    width: 100%;
     background: transparent;
     border: none;
-    border-bottom: 2px solid var(--secondary);
-    padding: 1rem 0;
+    border-bottom: 1px solid var(--secondary);
+    padding: 20px 0;
     color: var(--secondary);
-    font-family: var(--font-alt);
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    margin-bottom: 30px;
     outline: none;
 }
 
-input:focus, textarea:focus {
-    border-color: var(--accent);
-}
+input:focus, textarea:focus { border-color: var(--accent); }
 
 button {
     background: var(--secondary);
     color: var(--primary);
     border: none;
-    padding: 1.5rem;
+    padding: 20px 40px;
     font-weight: 900;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: background 0.3s;
 }
 
-button:hover {
-    background: var(--accent);
+button:hover { background: var(--accent); }
+
+@media (max-width: 768px) {
+    .work-grid, .contact-section { grid-template-columns: 1fr; }
+    .grid-item.large { grid-column: span 1; }
+    nav { padding: 20px; }
 }

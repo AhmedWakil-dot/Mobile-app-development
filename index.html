@@ -29,24 +29,20 @@
         </div>
     </section>
 
-    <section id="catalog" class="catalog">
-    <h2 class="reveal">The Catalog</h2>
-    <div class="catalog-container">
-        <div class="item">
-            <span>01</span>
-            <h3>PROJECT ALPHA</h3>
+    <section id="catalog" class="catalog-3d">
+    <div class="stage">
+        <div class="carousel">
+            <div class="item" style="--i:1;"><span>01</span></div>
+            <div class="item" style="--i:2;"><span>02</span></div>
+            <div class="item" style="--i:3;"><span>03</span></div>
+            <div class="item" style="--i:4;"><span>04</span></div>
+            <div class="item" style="--i:5;"><span>05</span></div>
+            <div class="item" style="--i:6;"><span>06</span></div>
+            <div class="item" style="--i:7;"><span>07</span></div>
+            <div class="item" style="--i:8;"><span>08</span></div>
         </div>
-        <div class="item">
-            <span>02</span>
-            <h3>VISIONARY FLOW</h3>
-        </div>
-        <div class="item">
-            <span>03</span>
-            <h3>RAW FREEDOM</h3>
-        </div>
-        </div>
+    </div>
 </section>
-    
 
     <section id="contact" class="contact">
         <h2>LET'S BUILD</h2>
@@ -58,39 +54,32 @@
         </form>
     </section>
     <script>
-    // 1. Reveal Elements on Scroll
-    const observerOptions = {
-        threshold: 0.1
-    };
+    const carousel = document.querySelector('.carousel');
+    let rotationAngle = 0;
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-            }
-        });
-    }, observerOptions);
-
-    // Apply reveal class to sections
-    document.querySelectorAll('section, .item').forEach(el => {
-        el.classList.add('reveal');
-        observer.observe(el);
+    window.addEventListener('wheel', (e) => {
+        // e.deltaY detects the scroll direction/speed
+        // Adjust the '0.1' to make it spin faster or slower
+        rotationAngle += e.deltaY * 0.1; 
+        
+        // Apply the rotation to the X axis for a vertical drum
+        // Change to rotateY if you want a horizontal merry-go-round
+        carousel.style.transform = `rotateX(${rotationAngle}deg)`;
     });
 
-    // 2. Tinder-style Mouse Tilt (Optional but very "Creative Agency")
-    const cards = document.querySelectorAll('.item');
-    cards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            let xAxis = (window.innerWidth / 2 - e.pageX) / 25;
-            let yAxis = (window.innerHeight / 2 - e.pageY) / 25;
-            card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
-        });
+    // Mobile Touch Support
+    let startY = 0;
+    window.addEventListener('touchstart', (e) => {
+        startY = e.touches[0].pageY;
+    });
 
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = `rotateY(0deg) rotateX(0deg)`;
-        });
+    window.addEventListener('touchmove', (e) => {
+        let touchY = e.touches[0].pageY;
+        let diff = startY - touchY;
+        rotationAngle += diff * 0.5;
+        carousel.style.transform = `rotateX(${rotationAngle}deg)`;
+        startY = touchY;
     });
 </script>
-
 </body>
 </html>

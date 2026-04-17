@@ -1,157 +1,58 @@
-/* Custom Fonts - Ensure you have these hosted or linked via Adobe/Google */
-:root {
-    --primary: #241f47;
-    --secondary: #ededed;
-    --accent: #c6ff00;
-    --font-main: 'Satoshi', sans-serif;
-    --font-alt: 'Helvetica Neue', Arial, sans-serif;
+/* Smooth Scroll Behavior */
+html {
+    scroll-behavior: smooth;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* Reveal Animation Class */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-body {
-    background-color: var(--primary);
-    color: var(--secondary);
-    font-family: var(--font-main);
-    line-height: 1.6;
-    overflow-x: hidden;
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-/* Typography */
-h1, h2 {
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: -2px;
-}
-
-/* Navigation */
-nav {
+/* Tinder-Style Catalog (Horizontal Snap) */
+.catalog-container {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 2rem;
     padding: 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: fixed;
-    width: 100%;
-    z-index: 100;
-    background: linear-gradient(to bottom, var(--primary) 20%, transparent);
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
 }
 
-.logo {
-    font-size: 2rem;
-    font-weight: 900;
-}
-
-.logo span { color: var(--accent); }
-
-.nav-links a {
-    color: var(--secondary);
-    text-decoration: none;
-    margin-left: 2rem;
-    font-family: var(--font-alt);
-    font-weight: 500;
-    transition: color 0.3s ease;
-}
-
-.nav-links a:hover {
-    color: var(--accent);
-}
-
-/* Sections */
-section, header {
-    padding: 10vh 2rem;
-}
-
-/* Hero */
-.hero {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-}
-
-.hero h1 {
-    font-size: clamp(3rem, 10vw, 8rem);
-    line-height: 0.9;
-}
-
-.hero h1 span { color: var(--accent); }
-
-/* Catalog Grid */
-.catalog .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 1rem;
+.catalog-container::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome/Safari */
 }
 
 .item {
-    background: #2a2552; /* Slightly lighter navy for empty state */
-    aspect-ratio: 4/5;
-    display: flex;
-    align-items: flex-end;
-    padding: 1rem;
-    border: 1px solid rgba(237, 237, 237, 0.1);
-    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    cursor: pointer;
-}
-
-.item:hover {
-    border-color: var(--accent);
-    transform: scale(0.98);
-    box-shadow: 0 0 30px rgba(198, 255, 0, 0.1);
-}
-
-.item span {
-    font-weight: 900;
-    opacity: 0.3;
-}
-
-.item:hover span {
-    color: var(--accent);
-    opacity: 1;
-}
-
-/* Contact Form */
-.contact {
-    max-width: 800px;
-}
-
-form {
+    min-width: 80vw; /* Takes up most of the screen like a card */
+    max-width: 500px;
+    height: 70vh;
+    scroll-snap-align: center;
+    background: #2a2552;
+    border-radius: 20px; /* Rounded card look */
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-    margin-top: 2rem;
+    justify-content: flex-end;
+    padding: 2rem;
+    position: relative;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.3s ease;
 }
 
-input, textarea {
-    background: transparent;
-    border: none;
-    border-bottom: 2px solid var(--secondary);
-    padding: 1rem 0;
-    color: var(--secondary);
-    font-family: var(--font-alt);
-    font-size: 1.2rem;
-    outline: none;
-}
-
-input:focus, textarea:focus {
+/* Tinder Hover Effect */
+.item:hover {
+    transform: rotate3d(1, 1, 1, 2deg) scale(1.02);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 20px rgba(198, 255, 0, 0.2);
     border-color: var(--accent);
 }
 
-button {
-    background: var(--secondary);
-    color: var(--primary);
-    border: none;
-    padding: 1.5rem;
-    font-weight: 900;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-button:hover {
-    background: var(--accent);
+/* Accent Glitch effect on Text */
+.hero h1:hover {
+    text-shadow: 2px 2px var(--accent);
+    cursor: default;
 }

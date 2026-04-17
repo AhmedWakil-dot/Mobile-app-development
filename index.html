@@ -25,24 +25,20 @@
     <section id="about" class="about">
         <div class="container">
             <h2>WHO IS FOWND?</h2>
-            <p>Fownd. is a creative collective built on the principle of <strong>sovereignty</strong>. We provide the high-impact visual tools; you keep the creative control. No templates, no compromises.just raw, bold design.</p>
+            <p>Fownd. is a creative collective built on the principle of <strong>sovereignty</strong>. We provide the high-impact visual tools; you keep the creative control. No templates, no compromises—just raw, bold design.</p>
         </div>
     </section>
 
-    <section id="catalog" class="catalog-3d">
-    <div class="stage">
-        <div class="carousel">
-            <div class="item" style="--i:1;"><span>01</span></div>
-            <div class="item" style="--i:2;"><span>02</span></div>
-            <div class="item" style="--i:3;"><span>03</span></div>
-            <div class="item" style="--i:4;"><span>04</span></div>
-            <div class="item" style="--i:5;"><span>05</span></div>
-            <div class="item" style="--i:6;"><span>06</span></div>
-            <div class="item" style="--i:7;"><span>07</span></div>
-            <div class="item" style="--i:8;"><span>08</span></div>
+    <section id="catalog" class="catalog">
+        <div class="grid">
+            <div class="item"><span>01</span></div>
+            <div class="item"><span>02</span></div>
+            <div class="item"><span>03</span></div>
+            <div class="item"><span>04</span></div>
+            <div class="item"><span>05</span></div>
+            <div class="item"><span>06</span></div>
         </div>
-    </div>
-</section>
+    </section>
 
     <section id="contact" class="contact">
         <h2>LET'S BUILD</h2>
@@ -53,33 +49,6 @@
             <button type="submit">SEND MESSAGE</button>
         </form>
     </section>
-    <script>
-    const carousel = document.querySelector('.carousel');
-    let rotationAngle = 0;
 
-    window.addEventListener('wheel', (e) => {
-        // e.deltaY detects the scroll direction/speed
-        // Adjust the '0.1' to make it spin faster or slower
-        rotationAngle += e.deltaY * 0.1; 
-        
-        // Apply the rotation to the X axis for a vertical drum
-        // Change to rotateY if you want a horizontal merry-go-round
-        carousel.style.transform = `rotateX(${rotationAngle}deg)`;
-    });
-
-    // Mobile Touch Support
-    let startY = 0;
-    window.addEventListener('touchstart', (e) => {
-        startY = e.touches[0].pageY;
-    });
-
-    window.addEventListener('touchmove', (e) => {
-        let touchY = e.touches[0].pageY;
-        let diff = startY - touchY;
-        rotationAngle += diff * 0.5;
-        carousel.style.transform = `rotateX(${rotationAngle}deg)`;
-        startY = touchY;
-    });
-</script>
 </body>
 </html>

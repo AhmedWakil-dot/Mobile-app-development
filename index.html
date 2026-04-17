@@ -30,15 +30,23 @@
     </section>
 
     <section id="catalog" class="catalog">
-        <div class="grid">
-            <div class="item"><span>01</span></div>
-            <div class="item"><span>02</span></div>
-            <div class="item"><span>03</span></div>
-            <div class="item"><span>04</span></div>
-            <div class="item"><span>05</span></div>
-            <div class="item"><span>06</span></div>
+    <h2 class="reveal">The Catalog</h2>
+    <div class="catalog-container">
+        <div class="item">
+            <span>01</span>
+            <h3>PROJECT ALPHA</h3>
         </div>
-    </section>
+        <div class="item">
+            <span>02</span>
+            <h3>VISIONARY FLOW</h3>
+        </div>
+        <div class="item">
+            <span>03</span>
+            <h3>RAW FREEDOM</h3>
+        </div>
+        </div>
+</section>
+    
 
     <section id="contact" class="contact">
         <h2>LET'S BUILD</h2>
@@ -49,6 +57,40 @@
             <button type="submit">SEND MESSAGE</button>
         </form>
     </section>
+    <script>
+    // 1. Reveal Elements on Scroll
+    const observerOptions = {
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, observerOptions);
+
+    // Apply reveal class to sections
+    document.querySelectorAll('section, .item').forEach(el => {
+        el.classList.add('reveal');
+        observer.observe(el);
+    });
+
+    // 2. Tinder-style Mouse Tilt (Optional but very "Creative Agency")
+    const cards = document.querySelectorAll('.item');
+    cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            let xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+            let yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+            card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = `rotateY(0deg) rotateX(0deg)`;
+        });
+    });
+</script>
 
 </body>
 </html>

@@ -18,8 +18,8 @@
     </nav>
 
     <header class="hero">
-        <h1>TOTAL CREATIVE FREEDOM<span>.</span></h1>
-    </header>
+    <h1 class="reveal-type"><span>TOTAL CREATIVE FREEDOM.</span></h1>
+</header>
 
     <section id="about" class="brand-statement">
         <div class="content-wrapper">
@@ -65,6 +65,51 @@
     <footer>
         <p>&copy; 2026 FOWND. ALL RIGHTS RESERVED.</p>
     </footer>
+<script>
+    // Custom Cursor Movement
+    const cursor = document.createElement('div');
+    cursor.classList.add('cursor');
+    document.body.appendChild(cursor);
 
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+    });
+
+    // Expand cursor on hover
+    const links = document.querySelectorAll('a, button, .grid-item');
+    links.forEach(link => {
+        link.addEventListener('mouseenter', () => {
+            cursor.style.transform = 'scale(4)';
+            cursor.style.background = 'var(--accent)';
+        });
+        link.addEventListener('mouseleave', () => {
+            cursor.style.transform = 'scale(1)';
+            cursor.style.background = 'transparent';
+        });
+    });
+
+    // Scroll Reveal Intersection Observer
+    const observerOptions = { threshold: 0.2 };
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal-type').forEach(el => observer.observe(el));
+
+    // Simple Parallax for Images
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const images = document.querySelectorAll('.image-placeholder');
+        images.forEach(img => {
+            let speed = 0.05;
+            img.style.transform = `translateY(${scrolled * speed}px)`;
+        });
+    });
+</script>
 </body>
 </html>
